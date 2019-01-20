@@ -1,0 +1,49 @@
+<style media="screen">
+  #toTop {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 199;
+  }
+</style>
+
+<button onclick="topFunction()" id="toTop" title="Go to top" style="display: none;">
+  <svg viewBox="0 0 32 32" class="icon icon-arrow-top" viewBox="0 0 32 32" aria-hidden="true"><path d="M17.504 26.025l.001-14.287 6.366 6.367L26 15.979 15.997 5.975 6 15.971 8.129 18.1l6.366-6.368v14.291z"/></svg>
+  Top
+</button>
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/">{{.Site.Params.orgName}}</a> {{.Site.Params.copyright}} <br>
+      {{with .Site.Params.showSupport}}<span style="font-size: 0.8em; color: #555;">Hugo port of <a href="https://github.com/TryGhost/Casper">Casper 2.1.7</a> by <a href="https://www.telematika.org">EM</a></span>{{end}}
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        {{with .Site.Params.fbName}}<a href="https://www.facebook.com/{{.}}" target="_blank" rel="noopener">Facebook</a>{{end}}
+        {{with .Site.Params.twitterName}}<a href="https://twitter.com/{{.}}" target="_blank" rel="noopener">Twitter</a>{{end}}
+        {{with .Site.Params.githubName}}<a href="https://github.com/{{.}}" target="_blank" rel="noopener">Github</a>{{end}}
+        {{with .Site.Params.linkedinName}}<a href="https://www.linkedin.com/in/{{.}}" target="_blank" rel="noopener">LinkedIn</a>{{end}}
+        {{with .Site.Params.mediumName}}<a href="https://medium.com/@{{.}}" target="_blank" rel="noopener">Medium</a>{{end}}
+    </nav>
+  </div>
+</footer>
+<script>
+
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.getElementById("toTop").style.display = "block";
+  } else {
+    document.getElementById("toTop").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
