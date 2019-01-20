@@ -127,3 +127,7 @@
   background: lightgray;
   border-radius: 50%;
 }
+
+.highlight {
+  width: 100%;
+}
