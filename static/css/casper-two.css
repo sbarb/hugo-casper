@@ -74,6 +74,11 @@
         text-align: center;
     }
 }
+@media (max-width: 500px) {
+    .post-full-content {
+      margin-top: 0px !important;
+    }
+}
 
 .post-full-content pre code {
     color: #e5eff5;
