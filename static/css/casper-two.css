@@ -84,19 +84,15 @@
     color: #e5eff5;
 }
 
-/* With content overlaying bottom of image */
-/* .post-full-content {
-  margin-bottom: 20px;
-} */
+
 /* With content pushed below image */
-.post-full-content {
-  margin-bottom: 20px;
+/* .post-full-content {
   position: initial;
   margin: 175px 0;
 }
 .post-full-content::before, .post-full-content::after {
   background: none;
-}
+} */
 
 
 .post-full-header {
@@ -121,4 +117,13 @@
 }
 .btn-primary:hover {
     background-color: #118dcf;
+}
+
+#toTop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 199;
+  background: lightgray;
+  border-radius: 50%;
 }

@@ -36,10 +36,10 @@
 <aside class="read-next outer">
   <div class="inner">
     <div class="read-next-feed">
-      {{ partial "readnext-random-sori" . }}
       {{with .NextInSection}}
       {{ partial "readnext-article-sori" . }}
       {{end}}
+      {{ partial "readnext-random-sori" . }}
       {{with .PrevInSection}}
       {{ partial "readnext-article-sori" . }}
       {{end}}
