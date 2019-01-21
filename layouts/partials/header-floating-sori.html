@@ -13,7 +13,7 @@
     </div>
 
     <!-- TODO: add linked in option here -->
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }} &title={{ .Title | htmlEscape }} &summary={{ .Summary | htmlEscape }}&source=LinkedIn">1LinkedIn Share</a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }} &title={{ .Title | safeHTML }} &summary={{ .Summary | safeHTML }}&source=LinkedIn">1LinkedIn Share</a>
     <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title | safeHTML }}" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>2LinkedIn</p>
