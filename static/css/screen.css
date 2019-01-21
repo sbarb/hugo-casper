@@ -1554,7 +1554,7 @@ background: #0073b1; */
     .floating-header-logo,.floating-header-title{
         font-size:1.5rem
     }
-    .floating-header-share-fb,.floating-header-share-tw{
+    .floating-header-share-fb,.floating-header-share-tw,.floating-header-share-linkedin{
         width:40px;
         height:40px;
         line-height:38px
