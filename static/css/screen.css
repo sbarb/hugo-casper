@@ -1477,7 +1477,7 @@ body{
     stroke:rgba(0,0,0,.7);
     transform:rotate(90deg)
 }
-.floating-header-share-fb,.floating-header-share-tw{
+.floating-header-share-fb,.floating-header-share-tw, .floating-header-share-linkedin{
     display:block;
     -ms-flex-align:center;
     -ms-grid-row-align:center;
@@ -1488,6 +1488,20 @@ body{
     line-height:48px;
     text-align:center;
     transition:all .5s cubic-bezier(.19,1,.22,1)
+}
+/* display: block;
+-ms-flex-align: center;
+-ms-grid-row-align: center;
+align-items: center;
+width: 60px;
+height: 60px;
+color: #fff;
+line-height: 60px;
+text-align: center;
+transition: all .5s cubic-bezier(.19,1,.22,1);
+background: #0073b1; */
+.floating-header-share-linkedin{
+    background:#0073b1
 }
 .floating-header-share-tw{
     background:#33b1ff
