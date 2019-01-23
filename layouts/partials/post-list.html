@@ -1,3 +1,4 @@
+{{/*{{ $paginator := .Paginate (where .Data.Pages.ByDate.Reverse "Type" "!=" "page") }}*/}}
 {{ $paginator := .Paginate (where .Data.Pages.ByDate.Reverse "Type" "post") }}
 {{ range $paginator.Pages }}
 
