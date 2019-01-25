@@ -22,5 +22,18 @@
   </div>
 </main>
 
+<!-- <ul>
+  {{$searchTerm := "hugo"}}
+  {{$searchTerm := lower $searchTerm}}
+  {{range $res := $.Site.Data.search.results}}
+  {{$title := (lower $res.title)}}
+  {{$content := (lower $res.content)}}
+  {{if (or (in $title $searchTerm) (in $content $searchTerm))}}
+  <li><a href="{{$res.url}}">{{$res.title}}</a></li>
+  {{end}}
+  {{end}}
+</ul> -->
+
+
 {{ partial "footer" . }}
 </div>{{ partial "js" . }}</body></html>
