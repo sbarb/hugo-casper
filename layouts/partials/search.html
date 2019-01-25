@@ -1,0 +1,92 @@
+<!-- modules -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+
+<div id="search" style="text-align: center; color: black">
+  <div class="search">
+    <div class="search-results" style="display: block;background: white;" :style="{'display': showresult?'block':'none'}">
+      <ul style="list-style: none;border-top: 0.5px solid lightgrey;padding: 0px 5vw; text-align: right">
+        <li v-for="item in result" style="border-bottom: 0.5px solid lightgrey;margin: 0px;padding:15px;" @click="location.href=item.url">
+          <a :href="item.url">
+            {{ printf "{{ item.title }}" }}
+          </a>
+          <div class="" v-show="item.description !== '<no value>'">
+            {{ printf "{{ item.description }}" }}
+          </div>
+        </li>
+      </ul>
+    </div>
+    <input type="text" placeholder="Search site..." v-model="txt" @keyup="search()" @blur="close()" maxlength="50" style="color: black">
+  </div>
+</div>
+
+<script>
+  let vuesearch = new Vue({
+    el: '#search', // div ID
+    data: {
+      showSearch: false,
+      txt: '', // will contain the text written by user
+      timeoutID: 0, // used to detect when the user stopped typing
+      showresult: false, // show the result dropdown, or not
+      result: {}, // results to display, as JSON : {[ {"url":"", "title":""},..] }
+      bdd: [] // will contain the full JSON file created by HUGO
+    },
+    mounted: function() {
+      // loading the full JSON to 'bdd'
+      console.log("getpage:", {{ with .Site.GetPage "/search" }} {{.Permalink}} {{end}})
+      axios.get('{{ with .Site.GetPage "/search" }}{{ .Permalink }}{{ end }}')
+              .then(function (response) {
+                vuesearch.bdd = response.data.results;
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+    },
+    methods: {
+      scrollToEnd: function() {
+        setTimeout(function() {
+          window.scrollTo(0,document.body.scrollHeight);
+        }, 500);
+      },
+      close: function() {
+        // Close the dropdown when the input search loses focus
+        // with a 300ms delay to let time for the click on link to work
+        setTimeout(function() {
+          vuesearch.showresult = false;
+          // vuesearch.txt = '';
+        }, 300);
+      },
+      search: function() {
+        // we will search when the user stopped typing for 500ms
+        clearTimeout(this.timeoutID);
+        this.timeoutID = setTimeout(this.dosearch, 500);
+        this.scrollToEnd()
+      },
+      dosearch: function() {
+        // do the search in the 'bdd'
+        this.result = []; // clear previous result
+        let words = this.txt.split(' '); // split typed text with spaces
+        let words2 = []; // words that will be searched
+        words.forEach(function(element) { // to skip empty words, if multiple spaces typed (i.e "a  b c")
+          if(element) {words2.push(element);}
+        });
+        let r;
+        let resultmp;
+        words2.forEach(function(e) { // for each word
+          r = vuesearch.bdd.filter(p => p.content.indexOf(e.toLowerCase()) !== -1);
+          if(vuesearch.result.length===0) {vuesearch.result = r.slice(); return;}
+          resultmp = [];
+          vuesearch.result.forEach(function(all1) {
+            r.forEach(function(all2) { // we want AND for words
+              if(all1.url===all2.url) {resultmp.push(all1);}
+            });
+          });
+          vuesearch.result = resultmp.slice();
+        });
+        this.result = this.result.slice(0, 10); // 10 results max
+        this.showresult = (this.result.length>0); // show results if we have one or more
+        console.log(this.result, this.showresult)
+      } // dosearch
+    } // methods
+  }); // Vue
+</script>
